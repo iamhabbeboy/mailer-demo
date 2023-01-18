@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\ExtraField;
+use App\Models\FieldValue;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ExtraFieldSeeder extends Seeder
+class FieldValueSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,10 @@ class ExtraFieldSeeder extends Seeder
      */
     public function run()
     {
-        ExtraField::query()->create([
+        FieldValue::query()->create([
            'subscriber_id' => 1,
            'field_id' => 1,
-           'field_value' => 'Nigeria',
+           'value' => 'Nigeria',
         ]);
     }
 }

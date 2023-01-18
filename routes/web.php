@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriberController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,16 +17,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    $data = \App\Models\Subscriber::query()->paginate(5);
-    return Inertia::render('Home', [
-        'subscribers' => $data,
-    ]);
-});
+Route::get('/', [SubscriberController::class, 'index']);
 
-Route::get('/subscribe', function () {
-    return Inertia::render('Subscribe');
-});
+Route::get('/subscribe', [SubscriberController::class, 'create']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

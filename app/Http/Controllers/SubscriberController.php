@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class SubscriberController extends Controller
 {
-    public function show(Event $event)
+    public function index(): Response
     {
-        return Inertia::render('Event/Show', [
-            'event' => $event->only(
-                'id',
-                'title',
-                'start_date',
-                'description'
-            ),
+        $data = \App\Models\Subscriber::query()->with('fields')->paginate(5);
+        return Inertia::render('Home', [
+            'subscribers' => $data,
         ]);
+    }
+
+    public function create(): Response
+    {
+        return Inertia::render('Subscribe');
     }
 }

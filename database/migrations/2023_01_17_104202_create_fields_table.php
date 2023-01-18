@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type');
+            $table->enum('type', ['date', 'number', 'string', 'boolean'])->default('string');
             $table->timestamps();
         });
     }

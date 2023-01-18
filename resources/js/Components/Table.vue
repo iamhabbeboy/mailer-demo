@@ -38,22 +38,13 @@ export default {
             {{ subscriber.state }}
           </span>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 w-2/5">
+                    <div v-if="!subscriber.fields.length"> - </div>
                     <div class="flex gap-2">
-            <span
-                class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
+            <span v-for="(value, index) in subscriber.fields" :key="index"
+                  class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
             >
-              Design
-            </span>
-                        <span
-                            class="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
-                        >
-              Product
-            </span>
-                        <span
-                            class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600"
-                        >
-              Develop
+              {{ value.title }}: {{ value.pivot.value }}
             </span>
                     </div>
                 </td>
@@ -99,7 +90,7 @@ export default {
 
             </tbody>
         </table>
-        <Pagination />
+        <Pagination/>
     </div>
 </template>
 

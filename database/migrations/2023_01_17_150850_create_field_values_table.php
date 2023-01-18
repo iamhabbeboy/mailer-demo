@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('extra_fields', function (Blueprint $table) {
+        Schema::create('field_values', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('subscriber_id');
             $table->unsignedBigInteger('field_id');
-            $table->string('field_value');
+            $table->string('value');
             $table->timestamps();
             $table->foreign('subscriber_id')
                 ->references('id')->on('subscribers')->onDelete('cascade');
