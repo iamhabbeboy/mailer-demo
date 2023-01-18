@@ -11,6 +11,7 @@ class SubscriberController extends Controller
     public function index(): Response
     {
         $data = \App\Models\Subscriber::query()->with('fields')->paginate(5);
+
         return Inertia::render('Home', [
             'subscribers' => $data,
         ]);
@@ -18,6 +19,9 @@ class SubscriberController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Subscribe');
+        $fields = \App\Models\Field::query()->get();
+        return Inertia::render('Subscribe', [
+            'inputFields' => $fields,
+        ]);
     }
 }
