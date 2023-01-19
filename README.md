@@ -4,7 +4,7 @@
 - Install packages with the following:
 ```bash
 composer install 
-yarn install
+npm install
 ```
   - Create a `database.sqlite` and `testing.sqlite` in `database/` folder and set the relative path in the `.env`
 ```bash
