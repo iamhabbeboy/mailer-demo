@@ -5,7 +5,9 @@
 ```bash
 composer install 
 npm install
+npm run dev 
 ```
+Also, you might need to run `npm run build` to generate ziggy url that maps Laravel routes with Vue, this is due to inertiajs framework that was used. 
   - Create a `database.sqlite` and `testing.sqlite` in `database/` folder and set the relative path in the `.env`
 ```bash
 DB_DATABASE=<path>/database/database.sqlite
@@ -25,6 +27,11 @@ DB_DATABASE=<path>/database/database.sqlite
 ```
  php artisan serve
 ```
+
+### Technology Used
+Instead of using Vue as instructed, [Inertia](https://inertiajs.com/) was chosen because it makes dealing with Vue much simpler and also been supported largely by the Laravel ecosystem.
+- Inertia(Vue)
+- Laravel
 
 ### Preview
 ![screenshot](https://res.cloudinary.com/denj7z5ec/image/upload/v1674125809/ezgif.com-gif-maker_3_oaxxm1.gif)
