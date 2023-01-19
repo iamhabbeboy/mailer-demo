@@ -30,7 +30,6 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
 
     public function delete(int $id)
     {
-        // TODO: Implement delete() method.
         return $this->subscriber->query()->find($id)->delete();
     }
 }

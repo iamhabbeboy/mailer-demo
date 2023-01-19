@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserSubscriptionRequest extends FormRequest
+class StoreSubscriptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StoreUserSubscriptionRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required',//|email:rfc,dnsunique:subscribers,email
+            'email' => 'required|email:rfc,dns,filter|unique:subscribers,email',
             'inputFields.*.title' => 'sometimes',
             'inputFields.*.type' => 'sometimes',
             'inputFields.*.value' => 'sometimes',

@@ -36,14 +36,12 @@ import {reactive} from "vue";
 
 export default {
     name: "Field",
-    props: ["data"],
+    props: {
+        data: Array,
+        store: Array,
+    },
     setup(props, {emit}) {
         const field = reactive({
-            title: '',
-            value: '',
-            type: '',
-        });
-        let fieldClone = reactive({
             title: '',
             value: '',
             type: '',
@@ -60,9 +58,9 @@ export default {
             if (field.title === '' || field.type === '') {
                 return false;
             } else {
+                const fieldClone = {};
                 fieldClone.title = field.title
                 fieldClone.type = field.type
-                fieldClone.value = field.value
                 fieldClone.value = field.value
                 emit("add-field", fieldClone);
 

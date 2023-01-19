@@ -23,6 +23,10 @@ Route::get('/subscribe', [SubscriberController::class, 'create'])->name('subscri
 
 Route::delete('subscribe/{id}', [SubscriberController::class, 'destroy']);
 
+Route::post('subscribe', [SubscriberController::class, 'store'])->name('store-subscriber');
+
+//Route::resource('subscribe', SubscriberController::class);
+
 //Route::get('/dashboard', function () {
 //    return Inertia::render('Dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');

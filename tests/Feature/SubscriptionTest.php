@@ -32,7 +32,7 @@ class SubscriptionTest extends TestCase
 
     public function test_add_new_subscription_via_endpoint()
     {
-        $response = $this->post('/api/subscribe', [
+        $response = $this->post(route('store-subscriber'), [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'inputType' => [],
@@ -43,7 +43,7 @@ class SubscriptionTest extends TestCase
 
     public function test_add_new_subscription_via_endpoint_validation()
     {
-        $this->post('/api/subscribe', [
+        $this->post(route('store-subscriber'), [
             'name' => '',
             'email' => '',
             'inputType' => [],

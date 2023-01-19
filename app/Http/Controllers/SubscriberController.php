@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserSubscribed;
-use App\Http\Requests\StoreUserSubscriptionRequest;
+use App\Http\Requests\StoreSubscriptionRequest;
 use App\Models\Subscriber;
 use App\Repository\Contracts\FieldRepositoryInterface;
 use App\Repository\Contracts\SubscriptionRepositoryInterface;
@@ -35,7 +35,7 @@ class SubscriberController extends Controller
         ]);
     }
 
-    public function store(StoreUserSubscriptionRequest $request)
+    public function store(StoreSubscriptionRequest $request)
     {
         $data = $request->toArray();
         $data['state'] = 'unconfirmed';
