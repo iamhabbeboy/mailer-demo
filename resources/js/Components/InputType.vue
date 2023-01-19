@@ -1,5 +1,5 @@
 <template>
-    <div v-html="form"></div>
+    <div v-html="form" :id="index" @change="handleFieldValue"></div>
     <button class="text-sm font-bold text-red-500 underline" @click="handleDeleteField">delete</button>
 </template>
 
@@ -16,7 +16,7 @@ export default {
         form.value = `<label class="block capitalize">${input.title}</label>`;
         switch (true) {
             case (input.type === "string" || input.type === "number" || input.type === "date"):
-                form.value += `<input required type="${props.field.type === 'string' ? 'text' : props.field.type}" class="${className}"/>`;
+                form.value += `<input required type="${props.field.type === 'string' ? 'text' : props.field.type}" class="${className}" />`;
                 break;
             case input.type === "boolean":
                 form.value += `<select required class="${className}">`;
@@ -29,12 +29,20 @@ export default {
                 break;
         }
 
+        const handleFieldValue = (event) => {
+            const data = props.field
+            data.value = event.target.value;
+            emit("add-field-value", data)
+        }
+
         const handleDeleteField = () => {
             emit("delete-field", props.index)
         }
 
         return {
             form,
+            index: props.index,
+            handleFieldValue,
             handleDeleteField,
         }
     }

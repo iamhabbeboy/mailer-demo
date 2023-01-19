@@ -3,6 +3,7 @@ import {ref, computed, reactive} from 'vue'
 import Layout from "@/Layouts/Layout.vue";
 import Field from "@/Components/Field.vue";
 import InputType from "@/Components/InputType.vue";
+import { useForm } from "@inertiajs/vue3";
 
 export default {
     props: ["inputFields"],
@@ -14,11 +15,11 @@ export default {
     setup(props) {
         const showModal = ref(false);
         const hasField = ref(false);
-        const fields = reactive({
+        const fields = useForm({
             name: '',
             email: '',
             inputType: [],
-        })
+        });
 
         const handleFields = () => {
             hasField.value = !hasField.value;
@@ -26,10 +27,10 @@ export default {
 
         const handleField = (data) => {
             // check if already added.
-            if (fields.inputType.filter(value => value.title === data.title).length > 0) {
-                return false;
-            }
-
+            // if (fields.inputType.filter(value => value.title === data.title).length > 0) {
+            //     return false;
+            // }
+            // const len = fields.inputType.filter(value => value.title === data.title);
             fields.inputType.push(data);
             hasField.value = false;
         }
@@ -41,13 +42,23 @@ export default {
         }
 
         const handleSubscriber = () => {
-            console.log(fields)
+            fields.post('/api/subscribe', {
+                preserveScroll: true,
+                onSuccess: () => {
+                    fields.reset()
+                }
+            })
+        }
+
+        const handleValue = (value) => {
+            // console.log(fields.inputType)
         }
 
         return {
             hasField,
             fields,
             showModal,
+            handleValue,
             handleField,
             handleFields,
             handleSubscriber,
@@ -63,6 +74,7 @@ export default {
         <div class="bg-white py-10">
             <div class="my-10 w-4/12 mx-auto rounded-md p-5">
                 <h1 class="text-2xl font-bold">Add Subscription</h1>
+                <div v-if="$page.props.flash.message">{{ $page.props.flash.message }}</div>
                 <form @submit.prevent="handleSubscriber">
                     <div>
                         <label class="block">Name</label>
@@ -76,7 +88,7 @@ export default {
                     </div>
                     <div v-if="fields.inputType.length">
                         <InputType v-for="(value, index) in fields.inputType" :key="index" :index="index" :field="value"
-                                   @delete-field="handleDeleteField"/>
+                                   @delete-field="handleDeleteField" @add-field-value="handleValue"/>
                     </div>
                     <div class="mt-3">
                         <button type="button"

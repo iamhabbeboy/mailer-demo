@@ -15,6 +15,11 @@ class Field extends Model
         'updated_at',
     ];
 
+    protected $fillable = [
+      'title',
+      'type',
+    ];
+
     public function subscribers(): BelongsToMany
     {
         return $this->belongsToMany(Subscriber::class, 'field_values', 'field_id', 'subscriber_id')->withPivot('value');

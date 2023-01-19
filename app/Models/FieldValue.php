@@ -10,6 +10,12 @@ class FieldValue extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'subscriber_id',
+        'field_id',
+        'value',
+    ];
+
     public function subscriber(): BelongsTo
     {
         return $this->belongsTo(Subscriber::class);

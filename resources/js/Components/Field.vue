@@ -4,8 +4,8 @@
             <select class="rounded-md w-full border-2 border-gray-200 text-gray-500" @change="updateField"
             >
                 <option value="">Select field</option>
-                <option v-for="(value, index) in data" :key="index" :value="value.title"
-                        :data-attr="JSON.stringify(value)">{{ value.title }}
+                <option v-for="(value, index) in data" :key="index" :value="value.title.toLowerCase()"
+                        :data-attr="JSON.stringify(value)">{{ value.title.toLowerCase() }}
                 </option>
             </select>
         </div>
@@ -40,6 +40,12 @@ export default {
     setup(props, {emit}) {
         const field = reactive({
             title: '',
+            value: '',
+            type: '',
+        });
+        let fieldClone = reactive({
+            title: '',
+            value: '',
             type: '',
         });
 
@@ -54,7 +60,15 @@ export default {
             if (field.title === '' || field.type === '') {
                 return false;
             } else {
-                emit("add-field", field);
+                fieldClone.title = field.title
+                fieldClone.type = field.type
+                fieldClone.value = field.value
+                fieldClone.value = field.value
+                emit("add-field", fieldClone);
+
+                field.type = ''
+                field.title = ''
+                field.value = ''
             }
         }
 

@@ -10,6 +10,12 @@ class Subscriber extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'state',
+    ];
+
     public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class, 'field_values', 'subscriber_id', 'field_id')
